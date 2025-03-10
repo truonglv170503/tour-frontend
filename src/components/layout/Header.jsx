@@ -1,7 +1,7 @@
 // src/components/layout/Header.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../context/AuthContext';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Header = () => {
   const { user, isAuthenticated, logout } = useAuthContext();
@@ -32,7 +32,7 @@ const Header = () => {
                   alt={`Photo of ${user.name}`}
                 />
               )}
-              <span>{user.name.split(' ')[0]}</span>
+              {/* <span>{user.name.split(' ')[0]}</span> */}
             </Link>
           </>
         ) : (

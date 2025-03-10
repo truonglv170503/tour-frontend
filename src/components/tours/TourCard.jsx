@@ -1,7 +1,7 @@
 // src/components/tours/TourCard.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Card = styled.div`
   border-radius: 3px;
@@ -9,7 +9,7 @@ const Card = styled.div`
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
   background-color: #fff;
   transition: 0.3s all;
-  
+
   &:hover {
     transform: translateY(-0.5rem) scale(1.03);
   }
@@ -47,13 +47,15 @@ const TourName = styled.h3`
 `;
 
 const TourCard = ({ tour }) => {
+  console.log(process.env.REACT_APP_BACKEND_URL + tour.imageCover);
   return (
     <Card>
       <CardHeader>
         <HeaderImage
-          src={`/img/tours/${tour.imageCover}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`}
           alt={tour.name}
         />
+
         <TourName>{tour.name}</TourName>
       </CardHeader>
       <div className="card__details">
@@ -70,9 +72,9 @@ const TourCard = ({ tour }) => {
         <div className="card__data">
           <span>
             <i className="far fa-calendar-alt"></i>
-            {new Date(tour.startDates[0]).toLocaleString('en-us', {
-              month: 'long',
-              year: 'numeric'
+            {new Date(tour.startDates[0]).toLocaleString("en-us", {
+              month: "long",
+              year: "numeric",
             })}
           </span>
         </div>
