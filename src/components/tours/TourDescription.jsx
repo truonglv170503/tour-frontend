@@ -11,7 +11,9 @@ const TourDescription = ({ tour }) => {
 
   return (
     <>
-      <h2 className="heading-secondary ma-bt-lg">About {tour.name} tour</h2>
+    <div className="overview-box">
+      <div>
+      {/* <h2 className="heading-secondary ma-bt-lg">About {tour.name} tour</h2> */}
 
       <div className="overview-box__group">
         <h2 className="heading-secondary ma-bt-lg">Quick facts</h2>
@@ -68,7 +70,8 @@ const TourDescription = ({ tour }) => {
           </div>
         ))}
       </div>
-
+      </div>
+      </div>
       <div className="description-box">
         <h2 className="heading-secondary ma-bt-lg">About {tour.name} tour</h2>
         {tour.description.split("\n").map((paragraph, i) => (

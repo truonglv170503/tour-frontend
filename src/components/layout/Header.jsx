@@ -15,7 +15,7 @@ const Header = () => {
       </nav>
       <div className="header__logo">
         <Link to="/">
-          <img src="/assets/images/pin.png" alt="Natours logo" />
+          <img src="/assets/img/logo-white.png" alt="Natours logo" />
         </Link>
       </div>
       <nav className="nav nav--user">

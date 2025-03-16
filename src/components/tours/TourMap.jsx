@@ -7,7 +7,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uYXNzY2htZWR0bWFubiIsImEiOiJjam54ZmM5N3gwN
 
 const TourMap = ({ locations }) => {
     const mapContainerRef = useRef(null);
-    
+    console.log("locations:" , locations);
     useEffect(() => {
       if (!locations || locations.length === 0) return;
   
@@ -16,6 +16,7 @@ const TourMap = ({ locations }) => {
         style: 'mapbox://styles/mapbox/streets-v11',
         scrollZoom: false
       });
+      console.log("map:" , map); 
   
       const bounds = new mapboxgl.LngLatBounds();
   
@@ -42,6 +43,9 @@ const TourMap = ({ locations }) => {
   
         // Mở rộng bounds để bao gồm vị trí hiện tại
         bounds.extend(loc.coordinates);
+        console.log("📍 Vị trí:");
+  console.log("🛠️ Tọa độ:", loc.coordinates);
+  console.log("📜 Mô tả:", loc.description);
       });
   
       map.fitBounds(bounds, {

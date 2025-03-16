@@ -22,7 +22,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/tour/:slug" element={<TourDetail />} />
+            <Route path="/tours/:id" element={<TourDetail />} />
             <Route path="/login" element={<LoginForm />} />
             {/* <Route path="/signup" element={<Signup />} /> */}
             {/* <Route path="/me" element={<UserProfile />} /> */}

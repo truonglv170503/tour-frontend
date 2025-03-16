@@ -12,8 +12,16 @@ const Home = () => {
     const fetchTours = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}tours`
-        );
+          `${process.env.REACT_APP_BACKEND_URL}tours`, {
+            headers: {
+              "Content-Type": "application/json",
+              'ngrok-skip-browser-warning': true
+            }
+          });
+          console.log("Base URL:", `${process.env.REACT_APP_BACKEND_URL}tours`);
+          console.log("Dữ liệu API trả về:", res.data
+
+          );
         setTours(res.data.data.data);
       } catch (err) {
         setError("Failed to load tours");
@@ -27,10 +35,9 @@ const Home = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
-
   return (
-    <div className="tours-container">
-      <h1>All Tours</h1>
+    <div className="tours-container" style={{ padding: "20px 0" }}>
+      
       <div className="card-container">
         {tours.map((tour) => (
           <TourCard key={tour.id} tour={tour} />

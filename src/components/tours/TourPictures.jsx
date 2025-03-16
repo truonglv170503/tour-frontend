@@ -7,7 +7,7 @@ const TourPictures = ({ pictures }) => {
         <div key={index} className="picture-box">
           <img
             className={`picture-box__img picture-box__img--${index + 1}`}
-            src={`/src/assets/images/tours/${image}`}
+            src={`/assets/img/tours/tour-1-cover.jpg`}
             alt={`Tour ${index + 1}`}
           />
         </div>

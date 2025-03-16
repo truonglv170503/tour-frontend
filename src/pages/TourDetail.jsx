@@ -8,9 +8,13 @@ import TourMap from '../components/tours/TourMap';
 import TourReviews from '../components/tours/TourReviews';
 import TourCta from '../components/tours/TourCta';
 import { tourService } from '../services/api';
+import axios from 'axios';
 
 const TourDetail = () => {
-  const { slug } = useParams();
+  const { id } = useParams();
+ 
+  
+console.log("Slug nhận được:", id);
   const [tour, setTour] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +22,15 @@ const TourDetail = () => {
   useEffect(() => {
     const fetchTour = async () => {
       try {
-        const response = await tourService.getTour(slug);
+        //const response = await tourService.getTour(slug);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}tours/${id}`, {
+            headers: {
+              "Content-Type": "application/json",
+              'ngrok-skip-browser-warning': true
+            }
+          });
+        console.log("API Response:", response.data);
         setTour(response.data.data.data);
         setLoading(false);
       } catch (err) {
@@ -28,7 +40,7 @@ const TourDetail = () => {
     };
 
     fetchTour();
-  }, [slug]);
+  }, [id]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -39,11 +51,9 @@ const TourDetail = () => {
       <TourHeader tour={tour} />
       
       <section className="section-description">
-        <div className="overview-box">
-          <div>
+        
             <TourDescription tour={tour} />
-          </div>
-        </div>
+          
       </section>
       
       <TourPictures pictures={tour.images} />
