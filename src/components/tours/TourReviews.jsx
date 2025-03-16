@@ -4,9 +4,17 @@ import React from 'react';
 const TourReviews = ({ reviews }) => {
   if (!reviews || reviews.length === 0) {
     return (
-      <section className="section-reviews">
+      <section className="section-reviews"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '200px',
+        textAlign: 'center',
+        color: 'white',
+      }}>
         <div className="reviews">
-          <p>Chưa có đánh giá nào.</p>
+          <p style={{ fontSize: '18px', fontWeight: 'bold', opacity: 0.8 }}>Chưa có đánh giá nào.</p>
         </div>
       </section>
     );

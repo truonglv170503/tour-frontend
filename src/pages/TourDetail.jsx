@@ -7,7 +7,7 @@ import TourPictures from '../components/tours/TourPictures';
 import TourMap from '../components/tours/TourMap';
 import TourReviews from '../components/tours/TourReviews';
 import TourCta from '../components/tours/TourCta';
-import { tourService } from '../services/api';
+
 import axios from 'axios';
 
 const TourDetail = () => {
@@ -20,6 +20,7 @@ console.log("Slug nhận được:", id);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    
     const fetchTour = async () => {
       try {
         //const response = await tourService.getTour(slug);
@@ -45,7 +46,7 @@ console.log("Slug nhận được:", id);
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!tour) return <div className="error">Không tìm thấy tour</div>;
-
+  console.log(`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`);
   return (
     <>
       <TourHeader tour={tour} />

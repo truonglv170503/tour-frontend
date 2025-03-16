@@ -1,6 +1,6 @@
 // src/components/tours/TourDescription.jsx
 import React from "react";
-
+import { FaMapMarkerAlt, FaCalendarAlt, FaUserFriends, FaStar } from "react-icons/fa";
 const TourDescription = ({ tour }) => {
   const formatDate = (date) => {
     return new Date(date).toLocaleString("en-us", {
@@ -19,9 +19,7 @@ const TourDescription = ({ tour }) => {
         <h2 className="heading-secondary ma-bt-lg">Quick facts</h2>
 
         <div className="overview-box__detail">
-          <svg className="overview-box__icon">
-            <use xlinkHref="/img/icons.svg#icon-calendar"></use>
-          </svg>
+          <FaCalendarAlt className="overview-box__icon" />
           <span className="overview-box__label">Next date</span>
           <span className="overview-box__text">
             {formatDate(tour.startDates[0])}
@@ -29,25 +27,19 @@ const TourDescription = ({ tour }) => {
         </div>
 
         <div className="overview-box__detail">
-          <svg className="overview-box__icon">
-            <use href="/img/icons.svg#icon-trending-up"></use>
-          </svg>
+        <FaMapMarkerAlt className="overview-box__icon" />
           <span className="overview-box__label">Difficulty</span>
           <span className="overview-box__text">{tour.difficulty}</span>
         </div>
 
         <div className="overview-box__detail">
-          <svg className="overview-box__icon">
-            <use href="/img/icons.svg#icon-user"></use>
-          </svg>
+          <FaUserFriends className="overview-box__icon" />
           <span className="overview-box__label">Participants</span>
           <span className="overview-box__text">{tour.maxGroupSize} people</span>
         </div>
 
         <div className="overview-box__detail">
-          <svg className="overview-box__icon">
-            <use href="/img/icons.svg#icon-star"></use>
-          </svg>
+          <FaStar className="overview-box__icon" /> 
           <span className="overview-box__label">Rating</span>
           <span className="overview-box__text">{tour.ratingsAverage} / 5</span>
         </div>
