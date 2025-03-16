@@ -1,48 +1,31 @@
-// src/hooks/useAuth.js
 import { useState } from 'react';
-import axios from 'axios';
+import { useAuthContext } from '../context/AuthContext';
 
 export const useAuth = () => {
+  const { login, logout } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const login = async (email, password) => {
+  const handleLogin = async (email, password) => {
     try {
       setIsLoading(true);
       setError(null);
-      
-      const res = await axios({
-        method: 'POST',
-        url: '/api/v1/users/login',
-        data: { email, password }
-      });
-
-      if (res.data.status === 'success') {
-        localStorage.setItem('user', JSON.stringify(res.data.data.user));
-        return true;
-      }
+      return await login(email, password); // Gọi login từ AuthContext
     } catch (err) {
-      setError(err.response?.data?.message || 'Could not log in');
+      setError(err.message);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = async () => {
-    try {
-      await axios({
-        method: 'GET',
-        url: '/api/v1/users/logout'
-      });
-      localStorage.removeItem('user');
-      return true;
-    } catch (err) {
-      return false;
-    }
+  const handleLogout = async () => {
+    setIsLoading(true);
+    await logout();
+    setIsLoading(false);
   };
 
-  return { login, logout, isLoading, error };
+  return { login: handleLogin, logout: handleLogout, isLoading, error };
 };
 
 export default useAuth;

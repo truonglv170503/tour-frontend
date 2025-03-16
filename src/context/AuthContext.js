@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         return true;
       }
     } catch (err) {
-      throw new Error(err.response?.data?.message || 'Could not log in');
+      return Error(err.response?.data?.message || 'Could not log in');
     }
   };
 
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
         return true;
       }
     } catch (err) {
-      throw new Error(err.response?.data?.message || 'Could not sign up');
+      return Error(err.response?.data?.message || 'Could not sign up');
     }
   };
 
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('user');
       return true;
     } catch (err) {
-      throw new Error('Could not log out');
+      return Error('Could not log out');
     }
   };
 

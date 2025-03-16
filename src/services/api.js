@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9999';
+// const API_URL = 'http://localhost:9999';
 
 // Interceptor để xử lý 401 errors (unauthorized)
 axios.interceptors.response.use(
@@ -15,26 +15,26 @@ axios.interceptors.response.use(
   }
 );
 
-export const tourService = {
-  getAllTours: () => axios.get(`${API_URL}/tours`),
-  getTour: (slug) => axios.get(`${API_URL}/tours/${slug}`),
-  getTopTours: () => axios.get(`${API_URL}/tours/top-5-cheap`)
-};
+// export const tourService = {
+//   getAllTours: () => axios.get(`${API_URL}/tours`),
+//   getTour: (slug) => axios.get(`${API_URL}/tours/${slug}`),
+//   getTopTours: () => axios.get(`${API_URL}/tours/top-5-cheap`)
+// };
 
 export const authService = {
   login: (email, password) => 
-    axios.post(`${API_URL}/users/login`, { email, password }),
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, { email, password }),
   signup: (name, email, password, passwordConfirm) => 
-    axios.post(`${API_URL}/users/signup`, { name, email, password, passwordConfirm }),
-  logout: () => axios.get(`${API_URL}/users/logout`)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, { name, email, password, passwordConfirm }),
+  logout: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/logout`)
 };
 
 export const userService = {
-  getMe: () => axios.get(`${API_URL}/users/me`),
+  getMe: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/me`),
   updateMe: (data) => 
-    axios.patch(`${API_URL}/users/updateMe`, data),
+    axios.patch(`${process.env.REACT_APP_BACKEND_URL}/user/updateMe`, data),
   updatePassword: (passwordCurrent, password, passwordConfirm) => 
-    axios.patch(`${API_URL}/users/updateMyPassword`, {
+    axios.patch(`${process.env.REACT_APP_BACKEND_URL}/user/updateMyPassword`, {
       passwordCurrent,
       password,
       passwordConfirm
@@ -43,6 +43,6 @@ export const userService = {
 
 export const bookingService = {
   getCheckoutSession: (tourId) => 
-    axios.get(`${API_URL}/bookings/checkout-session/${tourId}`),
-  getMyBookings: () => axios.get(`${API_URL}/bookings/my-tours`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/bookings/checkout-session/${tourId}`),
+  getMyBookings: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/bookings/my-tours`)
 };
