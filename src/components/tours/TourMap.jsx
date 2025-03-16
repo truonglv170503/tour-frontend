@@ -14,10 +14,16 @@ const TourMap = ({ locations }) => {
       const map = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: 'mapbox://styles/mapbox/streets-v11',
-        scrollZoom: false
+        scrollZoom: true, // Cho phép zoom bằng chuột cuộn
+        minZoom: 3, // Giới hạn zoom nhỏ nhất
+        maxZoom: 18 // Giới hạn zoom lớn nhất
       });
       console.log("map:" , map); 
-  
+       // Thêm nút điều hướng (zoom in/out)
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+
+    // Thêm nút fullscreen
+    map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
       const bounds = new mapboxgl.LngLatBounds();
   
       locations.forEach(loc => {
@@ -54,7 +60,8 @@ const TourMap = ({ locations }) => {
           bottom: 150,
           left: 100,
           right: 100
-        }
+        },
+        maxZoom: 15
       });
   
       return () => map.remove();
