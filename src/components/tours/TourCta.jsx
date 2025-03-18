@@ -25,12 +25,12 @@ const TourCta = ({ tour }) => {
         </div>
         <img
           className="cta__img cta__img--1"
-          src={`/img/tours/${tour.images[1]}`}
+          src={tour.images[1]}
           alt="Tour picture"
         />
         <img
           className="cta__img cta__img--2"
-          src={`/img/tours/${tour.images[2]}`}
+          src={tour.images[2]}
           alt="Tour picture"
         />
         <div className="cta__content">

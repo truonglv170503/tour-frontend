@@ -52,7 +52,7 @@ const TourDescription = ({ tour }) => {
           <div key={guide.id} className="overview-box__detail">
             <img
               className="overview-box__img"
-              src={`/img/users/${guide.photo}`}
+              src={guide.photo}
               alt={guide.name}
             />
             <span className="overview-box__label">

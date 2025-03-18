@@ -185,7 +185,8 @@ const TourCard = ({ tour }) => {
     <Card>
       <CardImage
         //src={`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`}
-        src={`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`}
+        //src={`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`}
+        src={tour.imageCover}
         alt={tour.name}
       />
       <CardContent>

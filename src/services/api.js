@@ -23,18 +23,24 @@ axios.interceptors.response.use(
 
 export const authService = {
   login: (email, password) => 
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, { email, password }),
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}user/login`, { email, password }),
   signup: (name, email, password, passwordConfirm) => 
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/signup`, { name, email, password, passwordConfirm }),
-  logout: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/logout`)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}user/signup`, { name, email, password, passwordConfirm }),
+  logout: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}user/logout`)
 };
 
 export const userService = {
-  getMe: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/me`),
+  getMe: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}user/me`,
+   {
+    headers: {
+      "Content-Type": "application/json",
+      'ngrok-skip-browser-warning': true
+    }
+  }),
   updateMe: (data) => 
-    axios.patch(`${process.env.REACT_APP_BACKEND_URL}/user/updateMe`, data),
+    axios.patch(`${process.env.REACT_APP_BACKEND_URL}user/updateMe`, data),
   updatePassword: (passwordCurrent, password, passwordConfirm) => 
-    axios.patch(`${process.env.REACT_APP_BACKEND_URL}/user/updateMyPassword`, {
+    axios.patch(`${process.env.REACT_APP_BACKEND_URL}user/updateMyPassword`, {
       passwordCurrent,
       password,
       passwordConfirm
@@ -43,6 +49,6 @@ export const userService = {
 
 export const bookingService = {
   getCheckoutSession: (tourId) => 
-    axios.get(`${process.env.REACT_APP_BACKEND_URL}/bookings/checkout-session/${tourId}`),
-  getMyBookings: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}/bookings/my-tours`)
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}bookings/checkout-session/${tourId}`),
+  getMyBookings: () => axios.get(`${process.env.REACT_APP_BACKEND_URL}bookings/my-tours`)
 };

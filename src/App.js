@@ -5,9 +5,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import TourDetail from './pages/TourDetail';
-//import Login from './pages/Login';
-//import Signup from './pages/Signup';
-//import UserProfile from './pages/UserProfile';
+import UserProfile from './pages/UserProfile';
 import LoginForm from './components/auth/LoginForm';
 import Checkout from './pages/Checkout';
 //import NotFound from './pages/NotFound';
@@ -25,7 +23,7 @@ function App() {
             <Route path="/tours/:id" element={<TourDetail />} />
             <Route path="/login" element={<LoginForm />} />
             {/* <Route path="/signup" element={<Signup />} /> */}
-            {/* <Route path="/me" element={<UserProfile />} /> */}
+            <Route path="/me" element={<UserProfile />} />
             <Route path="/checkout/:tourId" element={<Checkout />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>

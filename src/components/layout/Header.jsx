@@ -28,11 +28,11 @@ const Header = () => {
               {user.photo && (
                 <img
                   className="nav__user-img"
-                  src={`/assets/images/users/${user.photo}`}
+                  src={user.photo}
                   alt={`Photo of ${user.name}`}
                 />
               )}
-              {/* <span>{user.name.split(' ')[0]}</span> */}
+              <span>{user.name.split(' ')[0]}</span>
             </Link>
           </>
         ) : (

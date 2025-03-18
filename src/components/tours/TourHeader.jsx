@@ -8,7 +8,7 @@ const TourHeader = ({ tour }) => {
         <div className="header__hero-overlay">&nbsp;</div>
         <img
           className="header__hero-img"
-          src={`${process.env.REACT_APP_BACKEND_URL}images/tours/${tour.imageCover}`}
+          src={tour.imageCover}
           alt={tour.name}
         />
         
