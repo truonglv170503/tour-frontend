@@ -19,29 +19,46 @@ const UserProfile = () => {
       .catch(error => console.error("Error fetching user:", error));
   }, []);
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setUser((prevUser) => ({ ...prevUser, photo: URL.createObjectURL(file) }));
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("photo", file);
+    try {
+      const res = await userService.updateMe(formData);
+      if (res.data.status === "success") {
+        setUser({ ...user, photo: res.data.data.photo });
+        alert("Photo updated successfully!");
+      }
+    } catch (error) {
+      console.error("Error uploading photo:", error.response);
+      alert("Failed to upload photo");
     }
+    // if (file) {
+    //   setUser((prevUser) => ({ ...prevUser, photo: URL.createObjectURL(file) }));
+    // }
   };
 
   const handlePasswordChange = (e) => {
     setPasswords({ ...passwords, [e.target.name]: e.target.value });
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    userService.updateMe({ name: user.name, email: user.email })
-      .then(() => alert("Profile updated successfully!"))
-      .catch(error => console.error("Error updating profile:", error));
+    try {
+      const updatedUser = await userService.updateMe({ name: user.name, email: user.email });
+      setUser(updatedUser.data?.data); // Cập nhật state user
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
   };
 
   const handlePasswordUpdate = (e) => {
     e.preventDefault();
     userService.updatePassword(passwords.current, passwords.new, passwords.confirm)
       .then(() => alert("Password updated successfully!"))
-      .catch(error => console.error("Error updating password:", error));
+      .catch(error => console.error("Error updating password:", error.response));
   };
 
   if (!user) {
@@ -97,7 +114,7 @@ const UserProfile = () => {
                 />
               </div>
               <div className="form__group form__photo-upload">
-                <img className="form__user-photo" src={`/img/users/${user.photo}`} alt="User photo" />
+                <img className="form__user-photo" src={user.photo} alt="User photo" />
                 <input type="file" accept="image/*" id="photo" name="photo" onChange={handleFileChange} />
                 <label htmlFor="photo">Choose new photo</label>
               </div>

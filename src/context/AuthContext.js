@@ -1,13 +1,13 @@
 // src/context/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { authService, userService } from '../services/api';
-
+import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate(); 
   useEffect(() => {
     // Check if user is already logged in
     const storedUser = localStorage.getItem('user');
@@ -22,7 +22,9 @@ export const AuthProvider = ({ children }) => {
       const res = await authService.login(email, password);
       if (res.data.status === 'success') {
         setUser(res.data.data.user);
-        localStorage.setItem('user', JSON.stringify(res.data.data.user));
+        localStorage.setItem("token", res.data.token);
+        // localStorage.setItem('user', JSON.stringify(res.data.data.user));
+        console.log(localStorage.getItem("token"));
         return true;
       }
     } catch (err) {
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }) => {
       await authService.logout();
       setUser(null);
       localStorage.removeItem('user');
+      navigate('/');
       return true;
     } catch (err) {
       return Error('Could not log out');
