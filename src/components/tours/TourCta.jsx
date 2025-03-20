@@ -2,19 +2,22 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext'; // Sẽ tạo sau
+import { bookingService } from '../../services/api';
 
 const TourCta = ({ tour }) => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuthContext();
   
-  const handleBookTour = () => {
+  const handleBookTour = async () => {
     if (!isAuthenticated) {
       navigate('/login');
       return;
     }
     
     // Điều hướng đến trang thanh toán
-    navigate(`/checkout/${tour.id}`);
+    const response =  await bookingService.getCheckoutSession(tour._id);
+    console.log("URI:", response.data);
+    window.location.href = response.data.session.url;
   };
 
   return (
